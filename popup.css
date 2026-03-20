@@ -1,0 +1,318 @@
+/* ---- Reset & Base --------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 360px;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: #e4e4e7;
+  background: #18181b;
+}
+
+.container {
+  padding: 16px;
+}
+
+/* ---- Header --------------------------------------------------------------- */
+header {
+  margin-bottom: 12px;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #f4f4f5;
+}
+
+.subtitle {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #71717a;
+}
+
+/* ---- Toggle --------------------------------------------------------------- */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #3f3f46;
+  border-radius: 22px;
+  transition: background 0.2s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  background: #a1a1aa;
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.toggle input:checked + .slider {
+  background: #7c3aed;
+}
+
+.toggle input:checked + .slider::before {
+  transform: translateX(18px);
+  background: #f4f4f5;
+}
+
+/* ---- Display Name --------------------------------------------------------- */
+.display-name-section {
+  margin-bottom: 12px;
+}
+
+.display-name-section label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a1a1aa;
+  margin-bottom: 4px;
+}
+
+.input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.hint {
+  margin-top: 4px;
+  font-size: 10.5px;
+  color: #52525b;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #27272a;
+  margin: 12px 0;
+}
+
+/* ---- Rules Section -------------------------------------------------------- */
+.rules-section h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #a1a1aa;
+  margin-bottom: 8px;
+}
+
+.add-rule-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.add-rule-row input:first-child {
+  flex: 1.4;
+}
+
+.add-rule-row input:nth-child(2) {
+  flex: 1;
+}
+
+/* ---- Inputs --------------------------------------------------------------- */
+input[type="text"] {
+  background: #27272a;
+  border: 1px solid #3f3f46;
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: #e4e4e7;
+  font-size: 12.5px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input[type="text"]:focus {
+  border-color: #7c3aed;
+}
+
+input[type="text"]::placeholder {
+  color: #52525b;
+}
+
+/* ---- Buttons -------------------------------------------------------------- */
+.btn {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 12px;
+  transition: background 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background: #7c3aed;
+  color: #f4f4f5;
+}
+
+.btn-primary:hover {
+  background: #6d28d9;
+}
+
+.btn-small {
+  padding: 4px 10px;
+  font-size: 11.5px;
+  border-radius: 5px;
+}
+
+.btn-save {
+  background: #7c3aed;
+  color: #f4f4f5;
+}
+
+.btn-cancel {
+  background: #3f3f46;
+  color: #a1a1aa;
+}
+
+.btn-icon {
+  background: transparent;
+  color: #71717a;
+  padding: 2px 6px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  color: #e4e4e7;
+}
+
+.btn-danger:hover {
+  color: #f87171;
+}
+
+/* ---- Rules List ----------------------------------------------------------- */
+.rules-list {
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rules-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.rules-list::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 5px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #27272a;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.rule-phrase {
+  font-weight: 600;
+  color: #f87171;
+  flex-shrink: 0;
+}
+
+.rule-arrow {
+  color: #52525b;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.rule-replacement {
+  color: #34d399;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rule-replacement.dimmed {
+  color: #52525b;
+  font-style: italic;
+}
+
+.rule-actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+/* ---- Editing state -------------------------------------------------------- */
+.rule-item.editing {
+  gap: 4px;
+}
+
+.edit-input {
+  background: #18181b;
+  border: 1px solid #3f3f46;
+  border-radius: 5px;
+  padding: 4px 8px;
+  color: #e4e4e7;
+  font-size: 12px;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.edit-input:focus {
+  border-color: #7c3aed;
+}
+
+.edit-input-sm {
+  max-width: 90px;
+}
+
+/* ---- Empty message -------------------------------------------------------- */
+.empty-msg {
+  text-align: center;
+  color: #52525b;
+  font-size: 12px;
+  padding: 16px 0 8px;
+}
+
+/* ---- Footer --------------------------------------------------------------- */
+footer {
+  margin-top: 14px;
+  text-align: center;
+}
+
+footer p {
+  font-size: 10.5px;
+  color: #3f3f46;
+}

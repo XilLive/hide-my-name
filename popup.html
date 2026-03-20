@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hide My Name</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-row">
+        <h1>Hide My Name</h1>
+        <label class="toggle" title="Enable / Disable">
+          <input type="checkbox" id="enableToggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <p class="subtitle">Keep your identity safe on stream</p>
+    </header>
+
+    <section class="display-name-section">
+      <label for="displayName">Display Name</label>
+      <div class="input-row">
+        <input
+          type="text"
+          id="displayName"
+          placeholder="e.g. Sir Gumdrop"
+          spellcheck="false"
+        />
+        <button id="saveDisplayName" class="btn btn-primary" title="Save display name">Save</button>
+      </div>
+      <p class="hint">Default replacement when no per-word replacement is set.</p>
+    </section>
+
+    <hr />
+
+    <section class="rules-section">
+      <h2>Hidden Words</h2>
+      <div class="add-rule-row">
+        <input
+          type="text"
+          id="newPhrase"
+          placeholder="Word or phrase to hide"
+          spellcheck="false"
+        />
+        <input
+          type="text"
+          id="newReplacement"
+          placeholder="Replace with (optional)"
+          spellcheck="false"
+        />
+        <button id="addRule" class="btn btn-primary" title="Add rule">+</button>
+      </div>
+
+      <ul id="rulesList" class="rules-list"></ul>
+
+      <p id="emptyMsg" class="empty-msg">No words added yet.</p>
+    </section>
+
+    <footer>
+      <p>Changes apply instantly to all open tabs.</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

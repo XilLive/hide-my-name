@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Hide My Name",
+  "version": "1.0.0",
+  "description": "Hide personal info on web pages for streamers. Replaces names, addresses, and other sensitive text before it ever appears on screen.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

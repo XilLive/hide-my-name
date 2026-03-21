@@ -90,6 +90,23 @@
     "PRE",
   ]);
 
+  // Returns true if the node is inside an element the user is actively editing.
+  function isInsideEditable(node) {
+    const active = document.activeElement;
+    if (!active || active === document.body) return false;
+    const el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
+    if (!el) return false;
+    // Focused input / textarea.
+    if (active.tagName === "INPUT" || active.tagName === "TEXTAREA") {
+      return el === active || active.contains(el);
+    }
+    // Contenteditable regions.
+    if (active.isContentEditable) {
+      return active.contains(el);
+    }
+    return false;
+  }
+
   function processNode(root) {
     if (!enabled || rules.length === 0) return;
     const regex = buildRegex(rules);
@@ -99,6 +116,9 @@
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
         if (SKIP_TAGS.has(node.parentElement?.tagName)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        if (isInsideEditable(node)) {
           return NodeFilter.FILTER_REJECT;
         }
         return NodeFilter.FILTER_ACCEPT;
@@ -146,8 +166,10 @@
         }
       }
       // Handle input / textarea values directly (displayed text).
+      // Skip the element if the user is currently typing in it.
       if (
         (el.tagName === "INPUT" || el.tagName === "TEXTAREA") &&
+        el !== document.activeElement &&
         el.value &&
         regex.test(el.value)
       ) {
@@ -175,11 +197,11 @@
         // New nodes added to the DOM.
         for (const added of mutation.addedNodes) {
           if (added.nodeType === Node.TEXT_NODE) {
-            if (!SKIP_TAGS.has(added.parentElement?.tagName)) {
+            if (!SKIP_TAGS.has(added.parentElement?.tagName) && !isInsideEditable(added)) {
               replaceTextInNode(added, regex);
             }
           } else if (added.nodeType === Node.ELEMENT_NODE) {
-            processNode(added);
+            if (!isInsideEditable(added)) processNode(added);
           }
         }
         // Text content changed in place.
@@ -187,7 +209,7 @@
           mutation.type === "characterData" &&
           mutation.target.nodeType === Node.TEXT_NODE
         ) {
-          if (!SKIP_TAGS.has(mutation.target.parentElement?.tagName)) {
+          if (!SKIP_TAGS.has(mutation.target.parentElement?.tagName) && !isInsideEditable(mutation.target)) {
             replaceTextInNode(mutation.target, regex);
           }
         }

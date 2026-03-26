@@ -115,11 +115,76 @@ hr {
 }
 
 /* ---- Rules Section -------------------------------------------------------- */
+.rules-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
 .rules-section h2 {
   font-size: 13px;
   font-weight: 600;
   color: #a1a1aa;
-  margin-bottom: 8px;
+}
+
+/* Blur / reveal */
+.rules-content {
+  position: relative;
+}
+
+.rules-content.blurred > *:not(.blur-overlay) {
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+}
+
+.blur-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(24, 24, 27, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.rules-content.blurred .blur-overlay {
+  display: flex;
+}
+
+.btn-show-overlay {
+  background: #7c3aed;
+  color: #f4f4f5;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 9px 22px;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.45);
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.btn-show-overlay:hover {
+  background: #6d28d9;
+  box-shadow: 0 4px 22px rgba(124, 58, 237, 0.65);
+}
+
+.btn-reveal {
+  background: #27272a;
+  color: #a1a1aa;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid #3f3f46;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-reveal:hover {
+  background: #3f3f46;
+  color: #e4e4e7;
 }
 
 .add-rule-row {

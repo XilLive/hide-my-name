@@ -24,6 +24,28 @@
     }
   );
 
+  // ---- Blur / reveal ----------------------------------------------------------
+
+  const rulesContent = document.getElementById("rulesContent");
+  const toggleRevealBtn = document.getElementById("toggleReveal");
+  const showBtn = document.getElementById("showBtn");
+
+  function reveal() {
+    rulesContent.classList.remove("blurred");
+    toggleRevealBtn.textContent = "Hide";
+  }
+
+  function blur() {
+    rulesContent.classList.add("blurred");
+    toggleRevealBtn.textContent = "Show";
+  }
+
+  toggleRevealBtn.addEventListener("click", () => {
+    rulesContent.classList.contains("blurred") ? reveal() : blur();
+  });
+
+  showBtn.addEventListener("click", reveal);
+
   // ---- Event listeners --------------------------------------------------------
 
   enableToggle.addEventListener("change", () => {

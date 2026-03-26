@@ -36,26 +36,36 @@
     <hr />
 
     <section class="rules-section">
-      <h2>Hidden Words</h2>
-      <div class="add-rule-row">
-        <input
-          type="text"
-          id="newPhrase"
-          placeholder="Word or phrase to hide"
-          spellcheck="false"
-        />
-        <input
-          type="text"
-          id="newReplacement"
-          placeholder="Replace with (optional)"
-          spellcheck="false"
-        />
-        <button id="addRule" class="btn btn-primary" title="Add rule">+</button>
+      <div class="rules-header-row">
+        <h2>Hidden Words</h2>
+        <button id="toggleReveal" class="btn btn-reveal">Show</button>
       </div>
 
-      <ul id="rulesList" class="rules-list"></ul>
+      <div id="rulesContent" class="rules-content blurred">
+        <div class="blur-overlay">
+          <button id="showBtn" class="btn btn-show-overlay">👁 Show</button>
+        </div>
 
-      <p id="emptyMsg" class="empty-msg">No words added yet.</p>
+        <div class="add-rule-row">
+          <input
+            type="text"
+            id="newPhrase"
+            placeholder="Word or phrase to hide"
+            spellcheck="false"
+          />
+          <input
+            type="text"
+            id="newReplacement"
+            placeholder="Replace with (optional)"
+            spellcheck="false"
+          />
+          <button id="addRule" class="btn btn-primary" title="Add rule">+</button>
+        </div>
+
+        <ul id="rulesList" class="rules-list"></ul>
+
+        <p id="emptyMsg" class="empty-msg">No words added yet.</p>
+      </div>
     </section>
 
     <footer>
